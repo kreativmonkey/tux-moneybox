@@ -1,5 +1,13 @@
 # Tux money box for 3D printing
 
-Dies ist ein 3D Modell von einem Tux. Es ist modular aufgebaut und kann mit einem Parameter in seiner Größe verändert werden. Zusätzlich ist es möglich den Tux als Spardose ausdrucken zu lassen.
+Dieses 3D Tux Modell ist mit Openscad erstellt und modular aufgebaut. Der Tux lässt sich in seiner Größe variieren und kann als Figur oder Spardose gerendert werden. Als Vorlage für dieses Modell diente das Modell von [runeman](runeman.org/3d/tux).
 
-Bilder folgen.
+## Broken
+
+Aktuell ist das Modell nicht als Spardose verwendbar da ich daran arbeite die Wandstärke mit einfließen zu lassen und dem Objekt mehr Optionen zu geben.
+
+## ToDo
+
+- Kopfform anpassen
+- Verschluss verbessern
+
