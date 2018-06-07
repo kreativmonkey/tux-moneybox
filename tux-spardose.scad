@@ -32,6 +32,7 @@ wall=hight*0.05;
 currency="euro";
 
 // Numb of Fragments
+// Set $fn to ~100 for rendering the print objekt
 $fn=20;
 
 //////////////////////////////////////////////////////////////////////////
