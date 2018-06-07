@@ -17,6 +17,7 @@ wall=5;
 // Numb of Fragments
 $fn=20;
 inside=true;
+
 ///// Render
 // verschluss
 // Tux
@@ -55,7 +56,7 @@ if (renderer == "inside"){
 /////////////////// MODULES ////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
-module verschluss(size){
+module lock(size){
     translate([0,0,size*0.05]) cube([size*0.4, size*0.05, size*0.02], center=true);
     difference(){
         union(){
@@ -69,46 +70,43 @@ module verschluss(size){
     translate([0,0,size*0.022/2]) cube([size*0.322, size*0.032, size*0.022], center=true);
 }
 
-module inside(size){
+module coinhole(size, currency = "euro") {
+    // Dimension Dollar "Half Dollar": r=30.61mm h=2.15mm 
+    // Dimension Euro "2 Euro": r=25.75mm h=2.2mm
+    // Dimension Sterling "Ten pounds": r=65mm h=2.5mm
     
-    // innerpart
-    difference(){
-        union(){
-             body(size*0.965);
-            translate([0,0,size*0.1]) cylinder(r=size*0.11, size*0.82);
-        }
-        difference(){
-            translate([0, 0, size*0.01]) cylinder(r=size*0.30, h=size*0.05);
-            translate([0, 0, size*0.04]) cylinder(r=size*0.22, h=size*0.02);
-            translate([0, 0, size*0.02]) cube([size*0.06, size*0.41, size*0.07], center=true);
-        }
+    if( currency == "euro" ) {
+        if(size < 170) echo("The minimal hight is 150mm");
+        translate([0,size*0.05,size*0.95]) rotate([0,0,90]) cube([3, 30, size*0.3], center=true);
+        translate([0, 0, size*0.60]) cylinder(r=35/2, h=size*0.2);
     }
     
-    // Coinhole
-    #translate([0,size*0.05,size*0.85]) rotate([0,0,90]) cube([3,28,size*0.3], center=true);
+    if( currency == "dollar" ) {
+        if(size < 170) echo("The minimal hight is 170mm");
+        translate([0,size*0.05,size*0.95]) rotate([0,0,90]) cube([3, 35, size*0.3], center=true);
+        translate([0, 0, size*0.60]) cylinder(r=40/2, h=size*0.2);
+    }
     
-    difference(){
-        union(){
-        translate([0,1,size*0.83])
-                rotate([30,0,0])
-                resize(newsize=[size*0.30,size*0.30,size*0.30])
-                sphere(size*0.16);
-        }
-        
-        translate([0,-size*0.16,size*0.83])
-            cube([size*0.25,size*0.10,size*0.25], center=true);
-    
+    if( currency == "sterling" ) {
+        if(size < 190) echo("The minimal hight is 190mm");
+        translate([0,size*0.05,size*0.95]) rotate([0,0,90]) cube([4, 43, size*0.3], center=true);
+        translate([0, 0, size*0.60]) cylinder(r=45/2, h=size*0.2);
     }
     
     
-    // Verschluss mit aussparungen.
-    verschluss(size*1.01);
-    translate([0, 0, size*0.02]) cube([size*0.06, size*0.41, size*0.07], center=true);
-    translate([0, 0, size*0.04]) cube([size*0.41, size*0.06, size*0.006], center=true);
+ 
 }
 
+module cutLock(size){
+    translate([0,0,size*0.04]) cylinder(r=size*0.21, h=size*0.022);
+    // Verschluss mit aussparungen.
+    lock(size*1.01);
+    translate([0, 0, size*0.02]) cube([size*0.06, size*0.41, size*0.07], center=true);
+    translate([0, 0, size*0.04]) cube([size*0.41, size*0.06, size*0.006], center=true);
+    cylinder(r=size*0.18, h=size*0.025);
+}
 
-module tux(size){
+module tux(size, inside = false){
     difference(){
         union(){
             arm(size, "right");
