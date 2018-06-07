@@ -2,6 +2,8 @@
 
 Dieses 3D Tux Modell ist mit Openscad erstellt und modular aufgebaut. Der Tux lässt sich in seiner Größe variieren und kann als Figur oder Spardose gerendert werden. Als Vorlage für dieses Modell diente das Modell von [runeman](runeman.org/3d/tux).
 
+ <img align="center" width="200" alt="Tux money box Openscad image" src="images/tux_openscad.png">
+
 ## Printable
 
 You can print difference modells of the Tux. 
