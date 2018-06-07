@@ -10,43 +10,60 @@
 ////////////////// VARIABLES ////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 
+///// Render
+// lock
+// tux
+// moneybox minimum hight 200mm
+renderer = "moneybox";
+
 // Dimention in mm
+// For moneybox the minimal hight is:
+// euro = 150mm
+// dollar = 170mm
+// sterling = 190mm
 hight=200;
-wall=5; 
+wall=hight*0.05;
+
+// currency for the coinhole
+// Options:
+// - euro
+// - dollar
+// - pfund (without Ten Pounds)
+currency="euro";
 
 // Numb of Fragments
 $fn=20;
-inside=true;
-
-///// Render
-// verschluss
-// Tux
-renderer = "inside";
 
 //////////////////////////////////////////////////////////////////////////
 ////////////////// RENDERS ///////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-if (renderer == "verschluss") {
-    translate([0,0, hight*0.06]) rotate([180,0,0]) verschluss(hight);
+if (renderer == "lock") {
+    translate([0,0, hight*0.06]) rotate([180,0,0]) lock(hight);
 }
 
-if (renderer == "Tux") {
+if (renderer == "tux") {
     difference(){
-        tux(hight);
-        
-        if( inside == true ){
-            inside(hight);
-        }
-    
+        tux(hight);   
     }
 }
 
-if (renderer == "inside"){
+if ( renderer == "moneybox") {
+    difference(){
+        tux(hight, true);
+        
+        cutLock(hight);
+        coinhole(hight, currency);
+    }
+}
+
+if (renderer == "test"){
     difference(){
             
-        tux(hight);
+        tux(hight, true);
         
+        cutLock(hight);
+        coinhole(hight, currency);
         
         cube(200);
     }
@@ -127,10 +144,16 @@ module tux(size, inside = false){
                 body(size);
                 head(size);
             }
-            body(size, wall+5);
-            head(size, wall+5);
+            if( inside == true ){
+                body(size, wall+5);
+                head(size, wall+5);
+            }
             translate([0,0,-size*0.7]) cube([size*1.4,size*1.4,size*1.4], center=true);
         }
+        
+    // Botton
+    resize(newsize=[size*0.60,size*0.52,0])
+        cylinder(r=size*0.2, h=size*0.06);
 }
 
 module head(size, wthikness = 0){
@@ -207,8 +230,10 @@ module body(size, wthikness = 0){
     }
         
     //tail
-    translate([0,size*0.24,size*0.09])
-    sphere(size*0.09-wthikness/2);        
+    if( wthikness == 0){
+        translate([0,size*0.24,size*0.09])
+            sphere(size*0.09);    
+    }    
 }
 
 // ARMS
