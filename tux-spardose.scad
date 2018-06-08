@@ -22,7 +22,7 @@ renderer = "moneybox";
 // dollar = 170mm
 // sterling = 190mm
 hight=200;
-wall=hight*0.05;
+wall=3;
 
 // currency for the coinhole
 // Options:
@@ -33,7 +33,7 @@ currency="euro";
 
 // Numb of Fragments
 // Set $fn to ~100 for rendering the print objekt
-$fn=20;
+$fn=50;
 
 //////////////////////////////////////////////////////////////////////////
 ////////////////// RENDERS ///////////////////////////////////////////////
@@ -178,12 +178,12 @@ module head(size, wthikness = 0){
     // Pupills
     translate([size*0.05,-size*0.13,size*0.83])
     rotate([0,7,0])
-    resize(newsize=[size*0.075, size*0.044, size*0.1])
+    resize(newsize=[size*0.075-wthikness, size*0.044-wthikness, size*0.1-wthikness])
     sphere(3);
     
     translate([-size*0.05,-size*0.13,size*0.83])
     rotate([0,-7,0])
-    resize(newsize=[size*0.075, size*0.044, size*0.1])
+    resize(newsize=[size*0.075-wthikness, size*0.044-wthikness, size*0.1-wthikness])
     sphere(3);
     
     // beak
