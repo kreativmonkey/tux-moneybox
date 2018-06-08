@@ -23,7 +23,7 @@ renderer = "moneybox";
 // dollar = 170mm
 // sterling = 190mm
 hight=200;
-wall=3;
+wall=5;
 
 // currency for the coinhole
 // Options:
