@@ -14,6 +14,7 @@
 // lock
 // tux
 // moneybox minimum hight 200mm
+// dev
 renderer = "moneybox";
 
 // Dimention in mm
@@ -58,7 +59,7 @@ if ( renderer == "moneybox") {
     }
 }
 
-if (renderer == "test"){
+if (renderer == "dev"){
     difference(){
             
         tux(hight, true);
@@ -66,8 +67,10 @@ if (renderer == "test"){
         cutLock(hight);
         coinhole(hight, currency);
         
-        cube(200);
+        translate([-hight/2, 0, 0]) cube(hight);
+
     }
+    
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -96,19 +99,19 @@ module coinhole(size, currency = "euro") {
     if( currency == "euro" ) {
         if(size < 170) echo("The minimal hight is 150mm");
         translate([0,size*0.05,size*0.95]) rotate([0,0,90]) cube([3, 30, size*0.3], center=true);
-        translate([0, 0, size*0.60]) cylinder(r=35/2, h=size*0.2);
+        translate([0, 0, size*0.60]) cylinder(d=35, h=size*0.18);
     }
     
     if( currency == "dollar" ) {
         if(size < 170) echo("The minimal hight is 170mm");
         translate([0,size*0.05,size*0.95]) rotate([0,0,90]) cube([3, 35, size*0.3], center=true);
-        translate([0, 0, size*0.60]) cylinder(r=40/2, h=size*0.2);
+        translate([0, 0, size*0.60]) cylinder(d=40, h=size*0.18);
     }
     
     if( currency == "sterling" ) {
         if(size < 190) echo("The minimal hight is 190mm");
         translate([0,size*0.05,size*0.95]) rotate([0,0,90]) cube([4, 43, size*0.3], center=true);
-        translate([0, 0, size*0.60]) cylinder(r=45/2, h=size*0.2);
+        translate([0, 0, size*0.60]) cylinder(d=45, h=size*0.18);
     }
     
     
@@ -153,25 +156,40 @@ module tux(size, inside = false){
         }
         
     // Botton
-    resize(newsize=[size*0.60,size*0.52,0])
-        cylinder(r=size*0.2, h=size*0.06);
+    resize(newsize=[size*0.59,size*0.52,0])
+        cylinder(r2=size*0.14, r1=size*0.13, h=size*0.06);
 }
 
 module head(size, wthikness = 0){
     
-    difference(){
+   if( wthikness == 0){
+   difference(){
         union(){
             // HEAD
             translate([0,1,size*0.82])
             rotate([30,0,0])
             resize(newsize=[size*0.36-wthikness,size*0.34-wthikness,size*0.34-wthikness])
-            sphere(size*0.16);
+            sphere(size*0.16-wthikness);
         }
             
         // Eyeholes 
-        translate([-size*0.07,-size*0.19,size*0.85]) rotate([80,-5,-10]) resize(newsize=[size*0.1, size*0.15, size*0.12]) cylinder(r=size*0.12, h=size*0.01, center=true);
-        translate([size*0.07,-size*0.19,size*0.85]) rotate([80,5,10]) resize(newsize=[size*0.1, size*0.15, size*0.12]) cylinder(r=size*0.12, h=size*0.01, center=true); 
-        translate([0,-size*0.155,size*0.85]) rotate([-10,0,0]) resize(newsize=[size*0.15, size*0.02,size*0.15])sphere(size*0.02);
+        translate([-size*0.07,-size*0.19+wthikness,size*0.85]) rotate([80,-5,-10]) resize(newsize=[size*0.1, size*0.15, size*0.12]) cylinder(r=size*0.12, h=size*0.01, center=true);
+        translate([size*0.07,-size*0.19+wthikness,size*0.85]) rotate([80,5,10]) resize(newsize=[size*0.1, size*0.15, size*0.12]) cylinder(r=size*0.12, h=size*0.01, center=true); 
+        translate([0,-size*0.155+wthikness,size*0.85]) rotate([-10,0,0]) resize(newsize=[size*0.15, size*0.02,size*0.15])sphere(size*0.02);
+    }
+    } else {
+      difference(){
+        union(){
+            // HEAD
+            translate([0,1,size*0.82])
+            rotate([30,0,0])
+            resize(newsize=[size*0.36-wthikness,size*0.34-wthikness,size*0.34-wthikness])
+            sphere(size*0.16-wthikness);
+        }
+        
+        translate([0,-size*0.135,size*0.85]) rotate([-10,0,0]) cube([size*0.25, size*0.05, size*0.25], center=true);
+    
+      }  
     }
     
     
@@ -187,20 +205,22 @@ module head(size, wthikness = 0){
     sphere(3);
     
     // beak
-    hull(){
-        // tip
-        translate([0,-size*0.22,size*0.74])
-        resize(newsize=[size*0.11-wthikness,size*0.15-wthikness,size*0.044-wthikness])
-        sphere(2);
-        //chin
-        translate([0,-size*0.05,size*0.73])
-        resize(newsize=[size*0.25-wthikness,size*0.03-wthikness,size*0.22-wthikness])
-        sphere(2);
-        //nose
-        translate([0,-10,size*0.77])
-        rotate([5,0,0])
-        resize(newsize=[size*0.01-wthikness,size*0.22-wthikness,size*0.044-wthikness])
-        sphere(2);
+    if(wthikness ==0){
+        hull(){
+            // tip
+            translate([0,-size*0.22,size*0.74])
+            resize(newsize=[size*0.11-wthikness,size*0.15-wthikness,size*0.044-wthikness])
+            sphere(2);
+            //chin
+            translate([0,-size*0.05,size*0.73])
+            resize(newsize=[size*0.25-wthikness,size*0.03-wthikness,size*0.22-wthikness])
+            sphere(2);
+            //nose
+            translate([0,-10,size*0.77])
+            rotate([5,0,0])
+            resize(newsize=[size*0.01-wthikness,size*0.22-wthikness,size*0.044-wthikness])
+            sphere(2);
+        }
     }
 }
 
