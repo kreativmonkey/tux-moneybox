@@ -22,7 +22,7 @@ renderer = "moneybox";
 // euro = 150mm
 // dollar = 170mm
 // sterling = 190mm
-hight=200;
+hight=150;
 wall=5;
 
 // currency for the coinhole
@@ -156,7 +156,7 @@ module tux(size, inside = false){
         }
         
     // Botton
-    resize(newsize=[size*0.59,size*0.52,0])
+    resize(newsize=[size*0.59,size*0.515,0])
         cylinder(r2=size*0.14, r1=size*0.13, h=size*0.06);
 }
 
