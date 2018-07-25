@@ -7,9 +7,9 @@ This is a 3d model of the Linux mascot Tux. It is designed as a moneybox, but ca
 
  <img align="center" width="500" alt="Finished painted Tux." src="images/tux-final.JPG">
 
-## Parametre
+## Parameters
 
-With the parametre ``renderer`` you can choos which object you want render.
+With the following parameter ``renderer`` you can choos which object you want render.
 
  <img align="right" width="200" alt="Tux money box Openscad image" src="images/tux_openscad.png">
  
@@ -27,7 +27,7 @@ With the parametre ``renderer`` you can choos which object you want render.
 # Tux Spardose für den 3D Drucker
 Dieses 3D Tux Modell ist mit Openscad erstellt und modular aufgebaut. Der Tux lässt sich in seiner Größe variieren und kann als Figur oder Spardose gerendert werden. Als Vorlage für dieses Modell diente das Modell von [runeman](runeman.org/3d/tux).
 
-## Printable
+## Parameter
 
 You can print difference modells of the Tux. 
 
