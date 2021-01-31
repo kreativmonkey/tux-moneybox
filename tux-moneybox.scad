@@ -22,7 +22,7 @@ renderer = "moneybox";
 // euro = 150mm
 // dollar = 170mm
 // sterling = 190mm
-hight=150;
+hight=200;
 wall=5;
 
 // currency for the coinhole
@@ -156,7 +156,7 @@ module tux(size, inside = false){
         }
         
     // Botton
-    resize(newsize=[size*0.59,size*0.515,0])
+    resize(newsize=[size*0.5,size*0.5,0])
         cylinder(r2=size*0.14, r1=size*0.13, h=size*0.06);
 }
 
@@ -166,8 +166,8 @@ module head(size, wthikness = 0){
    difference(){
         union(){
             // HEAD
-            translate([0,1,size*0.82])
-            rotate([30,0,0])
+            translate([0,size*0.01,size*0.82])
+            rotate([size*0.30,0,0])
             resize(newsize=[size*0.36-wthikness,size*0.34-wthikness,size*0.34-wthikness])
             sphere(size*0.16-wthikness);
         }
@@ -181,8 +181,8 @@ module head(size, wthikness = 0){
       difference(){
         union(){
             // HEAD
-            translate([0,1,size*0.82])
-            rotate([30,0,0])
+            translate([0,size*0.01,size*0.82])
+            rotate([size*0.30,0,0])
             resize(newsize=[size*0.36-wthikness,size*0.34-wthikness,size*0.34-wthikness])
             sphere(size*0.16-wthikness);
         }
@@ -210,16 +210,16 @@ module head(size, wthikness = 0){
             // tip
             translate([0,-size*0.22,size*0.74])
             resize(newsize=[size*0.11-wthikness,size*0.15-wthikness,size*0.044-wthikness])
-            sphere(2);
+            sphere(size*0.02);
             //chin
             translate([0,-size*0.05,size*0.73])
             resize(newsize=[size*0.25-wthikness,size*0.03-wthikness,size*0.22-wthikness])
-            sphere(2);
+            sphere(size*0.02);
             //nose
-            translate([0,-10,size*0.77])
+            translate([0,-size*0.10,size*0.77])
             rotate([5,0,0])
             resize(newsize=[size*0.01-wthikness,size*0.22-wthikness,size*0.044-wthikness])
-            sphere(2);
+            sphere(size*0.02);
         }
     }
 }
@@ -229,22 +229,22 @@ module body(size, wthikness = 0){
     // body
     difference(){
         hull(){
-            translate([0,0,15])
+            translate([0,0,size*0.15])
             resize(newsize=[size*0.60-wthikness,size*0.52-wthikness,size*0.60-wthikness])
             sphere((size*0.60+wthikness)/2, center=true);
             //neck
-            translate([0,1.5,size*0.60])
+            translate([0,size*0.015,size*0.60])
             sphere(size*0.17-wthikness/2);
             //back top
             translate([0,size*0.11,size*0.52])
-            rotate([20,0,0])
+            rotate([size*0.20,0,0])
             resize(newsize=[size*0.34-wthikness,size*0.22-wthikness,size*0.40-wthikness])
             sphere(2);
             //back bottom
             translate([0,size*0.22,size*0.30])
-            rotate([10,0,0])
+            rotate([size*0.10,0,0])
             resize(newsize=[size*0.22-wthikness,size*0.11-wthikness,size*0.44-wthikness])
-            sphere(2);
+            sphere(size*0.02);
         }
         translate([0,0,-size*0.35+wthikness])
             cube([size*1.40-wthikness,size*1.40-wthikness,size*0.70-wthikness], center=true);
