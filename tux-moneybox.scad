@@ -141,7 +141,9 @@ module tux(size, inside = false){
             arm(size, "left", wall);
             foot(size, "right", wall);
             foot(size, "left", wall);
-        }       
+        }    
+        translate([0,0,-size*0.7]) cube([size*1.4,size*1.4,size*1.4], center=true);
+
     }
     difference(){
             union(){
